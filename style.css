@@ -1,0 +1,179 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+nav {
+  height: 7vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #dfd6d6;
+}
+
+.nav-right {
+  gap: 15%;
+  display: flex;
+  align-items: center;
+  width: 20%;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: 800;
+  margin-left: 25px;
+  width: 10%;
+}
+/* ====== Navbar Responsive Additions ====== */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #0077cc;
+}
+
+/* Hamburger hidden on desktop */
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+/* Responsive for small screens */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background: #dfd6d6;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 8px;
+    width: 150px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 93vh;
+
+  /* background-color: crimson; */
+}
+
+.code {
+  width: 50%;
+  height: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+/* For Webkit browsers (Chrome, Safari) */
+.code::-webkit-scrollbar {
+  width: 8px; /* scrollbar width */
+}
+
+.code::-webkit-scrollbar-thumb {
+  background-color: darkgray;
+  border-radius: 4px;
+}
+
+.code::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+#outputFrame {
+  color: whitesmoke!;
+}
+
+.output {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.code-input {
+  width: 100%;
+  height: 47%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 20px 0px 0px 25px;
+}
+
+.textarea {
+  height: 90%;
+  width: 90%;
+  font-size: 20px;
+  resize: none;
+  margin-bottom: 10px;
+  border: 1px solid gray;
+}
+
+
+
+.dark-mode nav {
+  background-color: #333;
+  color: white;
+}
+/* ===== Modal Styles ===== */
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  width: 50%;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+}
+
+.modal-content h2 {
+  margin-bottom: 10px;
+}
+
+.modal-content p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 24px;
+  cursor: pointer;
+}
