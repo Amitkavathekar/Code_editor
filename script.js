@@ -1,6 +1,6 @@
 const htmlEditor = ace.edit("htmlEditor");
 htmlEditor.session.setMode("ace/mode/html");
-htmlEditor.setValue("<h1>Hello, Amit!</h1>");
+htmlEditor.setValue("<h1>Hello World...!</h1>");
 htmlEditor.setOptions({
   enableBasicAutocompletion: true,
   enableSnippets: true,
