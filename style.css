@@ -25,7 +25,7 @@ nav {
   font-weight: 800;
   margin-left: 25px;
   width: 10%;
-} 
+}
 
 .nav-links {
   list-style: none;
@@ -136,7 +136,6 @@ nav {
   color: white;
 }
 
-
 .modal {
   display: none;
   position: fixed;
@@ -173,4 +172,96 @@ nav {
   right: 12px;
   font-size: 24px;
   cursor: pointer;
+}
+
+/* ==============================
+   📱 Mobile View (max-width: 600px)
+   ============================== */
+@media (max-width: 600px) {
+  nav {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-left: 10px!;
+  }
+
+  .container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .code {
+    width: 100%;
+  }
+
+  .code-input {
+    width: 100%;
+    height: 40vh;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  .output {
+    width: 100%;
+    height: 300px;
+    margin-top: 15px;
+  }
+
+  .modal-content {
+    width: 90%;
+    margin: 30% auto;
+  }
+}
+
+/* ==============================
+     📲 Tablet View (601px - 900px)
+     ============================== */
+@media (min-width: 601px) and (max-width: 900px) {
+  nav {
+    padding: 10px 20px;
+  display: flex;
+  justify-content: space-around;
+  }
+
+  .nav-right img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .container {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .code {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .code-input {
+    flex: 1 1 45%;
+    height: 51vh;
+    min-width: 300px;
+    width: 100%;
+  }
+
+  .output {
+    width: 100%;
+    height: 400px;
+    margin-top: 15px;
+  }
+
+  .modal-content {
+    width: 80%;
+  }
 }
