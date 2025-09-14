@@ -86,7 +86,6 @@ function clearJsCode() {
 const theme = document.getElementById("theme");
 const pdf = document.getElementById("pdf");
 const about = document.getElementById("about");
-const profile = document.getElementById("profile");
 
 theme.addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
@@ -107,7 +106,6 @@ theme.addEventListener("click", () => {
   theme.src = isDark ? "/images/lightmode.png" : "/images/darkmode.png";
   pdf.src = isDark ? "/images/lightmodepdf.png" : "/images/pdf.png";
   about.src = isDark ? "/images/lightabout.png" : "/images/about.png";
-  profile.src = isDark ? "/images/lightprofile.png" : "/images/profile.png";
 
   document.body.style.color = isDark ? "white" : "black";
   document.body.style.backgroundColor = isDark ? "#1e1e1e" : "white";
@@ -136,10 +134,9 @@ window.addEventListener("click", (e) => {
 const pdfIcon = document.getElementById("pdf");
 
 pdfIcon.addEventListener("click", () => {
-
   function downloadPdf() {
     const { jsPDF } = window.jspdf;
-    alert("ok");
+    confirm("Download code");
 
     // Get code from editors
     const htmlCode = htmlEditor.getValue();
@@ -167,7 +164,8 @@ pdfIcon.addEventListener("click", () => {
       const lines = doc.splitTextToSize(code, 180);
 
       for (let i = 0; i < lines.length; i++) {
-        if (y > 280) { // page end reached
+        if (y > 280) {
+          // page end reached
           doc.addPage();
           y = 20;
         }
@@ -189,11 +187,11 @@ pdfIcon.addEventListener("click", () => {
 
     // Add blocks on separate pages
     addCodeBlock("HTML Code:", htmlCode);
-    doc.addPage(); 
+    doc.addPage();
     y = 20; // ensure new page for CSS
 
     addCodeBlock("CSS Code:", cssCode);
-    doc.addPage(); 
+    doc.addPage();
     y = 20; // ensure new page for JS
 
     addCodeBlock("JavaScript Code:", jsCode);

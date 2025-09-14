@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CodePlay | Live Code Editor</title>
+    <title>QuickCode | Live Code Editor</title>
     <link rel="stylesheet" href="style.css" />
     <style>
       /* Basic Modal Styling */
@@ -36,10 +36,21 @@
     <nav>
       <p class="logo">QuickCode</p>
       <div class="nav-right">
-        <img id="pdf" src="/images/pdf.png" alt="downloadCode" />
-        <img id="theme" src="/images/darkmode.png" alt=" Theme" />
-        <img id="about" src="/images/about.png" alt="About" />
-        <img id="profile" src="/images/profile.png" alt="Profile" />
+        <img
+          id="pdf"
+          src="/images/pdf.png"
+          alt="downloadCode"
+          title="Download Code" />
+        <img
+          id="theme"
+          src="/images/darkmode.png"
+          alt=" Theme"
+          title="Toggle Theme" />
+        <img
+          id="about"
+          src="/images/about.png"
+          alt="About"
+          title="About this project" />
       </div>
     </nav>
 
@@ -173,6 +184,9 @@
             font-size: 20px;
             color: white;
             padding: 5px;
+            display: flex;
+            width: 100%;
+            margin: auto;
           ">
           Output
         </p>
@@ -184,8 +198,6 @@
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.0/ace.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.0/ext-language_tools.js"></script>
