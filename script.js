@@ -1,22 +1,22 @@
-const htmlEditor = ace.edit("htmlEditor");
-htmlEditor.session.setMode("ace/mode/html");
-htmlEditor.setValue("<h1>Hello World...!</h1>");
+const htmlEditor = ace.edit('htmlEditor');
+htmlEditor.session.setMode('ace/mode/html');
+htmlEditor.setValue('<h1>Hello World...!</h1>');
 htmlEditor.setOptions({
   enableBasicAutocompletion: true,
   enableSnippets: true,
   enableLiveAutocompletion: true,
 });
 
-const cssEditor = ace.edit("cssEditor");
-cssEditor.session.setMode("ace/mode/css");
+const cssEditor = ace.edit('cssEditor');
+cssEditor.session.setMode('ace/mode/css');
 cssEditor.setOptions({
   enableBasicAutocompletion: true,
   enableSnippets: true,
   enableLiveAutocompletion: true,
 });
 
-const jsEditor = ace.edit("jsEditor");
-jsEditor.session.setMode("ace/mode/javascript");
+const jsEditor = ace.edit('jsEditor');
+jsEditor.session.setMode('ace/mode/javascript');
 jsEditor.setValue("console.log('Hello from JS');");
 jsEditor.setOptions({
   enableBasicAutocompletion: true,
@@ -24,7 +24,7 @@ jsEditor.setOptions({
   enableLiveAutocompletion: true,
 });
 
-const outputFrame = document.getElementById("outputFrame");
+const outputFrame = document.getElementById('outputFrame');
 let isDark = false;
 
 function updateOutput() {
@@ -34,23 +34,23 @@ function updateOutput() {
   const cssCode =
     `<style>
         body {
-          color: ${isDark ? "white" : "black"};
-          background-color: ${isDark ? "#1e1e1e" : "white"};
+          color: ${isDark ? 'white' : 'black'};
+          background-color: ${isDark ? '#1e1e1e' : 'white'};
         }
       </style>` +
-    "<style>" +
+    '<style>' +
     cssEditor.getValue() +
-    "</style>";
+    '</style>';
 
-  const jsCode = "<script>" + jsEditor.getValue() + "</script>";
+  const jsCode = '<script>' + jsEditor.getValue() + '</script>';
 
   outputFrame.srcdoc = htmlCode + cssCode + jsCode;
 }
 
 // Live update whenever editor content changes
-htmlEditor.session.on("change", updateOutput);
-cssEditor.session.on("change", updateOutput);
-jsEditor.session.on("change", updateOutput);
+htmlEditor.session.on('change', updateOutput);
+cssEditor.session.on('change', updateOutput);
+jsEditor.session.on('change', updateOutput);
 
 // Run once on load
 updateOutput();
@@ -60,83 +60,83 @@ updateOutput();
 // ================================
 function copyHtmlCode() {
   navigator.clipboard.writeText(htmlEditor.getValue());
-  alert("HTML code copied!");
+  alert('HTML code copied!');
 }
 function copyCssCode() {
   navigator.clipboard.writeText(cssEditor.getValue());
-  alert("CSS code copied!");
+  alert('CSS code copied!');
 }
 function copyJsCode() {
   navigator.clipboard.writeText(jsEditor.getValue());
-  alert("JS code copied!");
+  alert('JS code copied!');
 }
 function clearHtmlCode() {
-  htmlEditor.setValue("");
+  htmlEditor.setValue('');
 }
 function clearCssCode() {
-  cssEditor.setValue("");
+  cssEditor.setValue('');
 }
 function clearJsCode() {
-  jsEditor.setValue("");
+  jsEditor.setValue('');
 }
 
 // ================================
 // Theme Toggle
 // ================================
-const theme = document.getElementById("theme");
-const pdf = document.getElementById("pdf");
-const about = document.getElementById("about");
+const theme = document.getElementById('theme');
+const pdf = document.getElementById('pdf');
+const about = document.getElementById('about');
 
-theme.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
+theme.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
   isDark = !isDark;
 
   // Switch Ace editor themes
   if (isDark) {
-    htmlEditor.setTheme("ace/theme/chaos");
-    cssEditor.setTheme("ace/theme/chaos");
-    jsEditor.setTheme("ace/theme/chaos");
+    htmlEditor.setTheme('ace/theme/chaos');
+    cssEditor.setTheme('ace/theme/chaos');
+    jsEditor.setTheme('ace/theme/chaos');
   } else {
-    htmlEditor.setTheme("ace/theme/chrome");
-    cssEditor.setTheme("ace/theme/chrome");
-    jsEditor.setTheme("ace/theme/chrome");
+    htmlEditor.setTheme('ace/theme/chrome');
+    cssEditor.setTheme('ace/theme/chrome');
+    jsEditor.setTheme('ace/theme/chrome');
   }
 
   // Change icons + parent styles
-  theme.src = isDark ? "/images/lightmode.png" : "/images/darkmode.png";
-  pdf.src = isDark ? "/images/lightmodepdf.png" : "/images/pdf.png";
-  about.src = isDark ? "/images/lightabout.png" : "/images/about.png";
+  theme.src = isDark ? '/images/lightmode.png' : '/images/darkmode.png';
+  pdf.src = isDark ? '/images/lightmodepdf.png' : '/images/pdf.png';
+  about.src = isDark ? '/images/lightabout.png' : '/images/about.png';
 
-  document.body.style.color = isDark ? "white" : "black";
-  document.body.style.backgroundColor = isDark ? "#1e1e1e" : "white";
+  document.body.style.color = isDark ? 'white' : 'black';
+  document.body.style.backgroundColor = isDark ? '#1e1e1e' : 'white';
 
   // 🔥 Re-render iframe with correct theme
   updateOutput();
 });
 // =================== ABOUT MODAL =================== //
-const aboutIcon = document.getElementById("about");
-const aboutModal = document.getElementById("aboutModal");
-const closeBtn = aboutModal.querySelector(".close");
+const aboutIcon = document.getElementById('about');
+const aboutModal = document.getElementById('aboutModal');
+const closeBtn = aboutModal.querySelector('.close');
 
-aboutIcon.addEventListener("click", () => {
-  aboutModal.style.display = "block";
+aboutIcon.addEventListener('click', () => {
+  aboutModal.style.display = 'block';
 });
 
-closeBtn.addEventListener("click", () => {
-  aboutModal.style.display = "none";
+closeBtn.addEventListener('click', () => {
+  aboutModal.style.display = 'none';
 });
 
-window.addEventListener("click", (e) => {
+window.addEventListener('click', (e) => {
   if (e.target === aboutModal) {
-    aboutModal.style.display = "none";
+    aboutModal.style.display = 'none';
   }
 });
-const pdfIcon = document.getElementById("pdf");
+const pdfIcon = document.getElementById('pdf');
 
-pdfIcon.addEventListener("click", () => {
+pdfIcon.addEventListener('click', () => {
   function downloadPdf() {
     const { jsPDF } = window.jspdf;
-    confirm("Download code");
+    confirm('Download code');
 
     // Get code from editors
     const htmlCode = htmlEditor.getValue();
@@ -148,9 +148,9 @@ pdfIcon.addEventListener("click", () => {
     let y = 20; // starting y-coordinate
 
     // Title
-    doc.setFont("courier", "normal");
+    doc.setFont('courier', 'normal');
     doc.setFontSize(14);
-    doc.text("QuickCode Project Export", 10, 10);
+    doc.text('QuickCode Project Export', 10, 10);
     doc.setFontSize(10);
 
     // Helper to add code block with automatic new page if needed
@@ -186,18 +186,18 @@ pdfIcon.addEventListener("click", () => {
     }
 
     // Add blocks on separate pages
-    addCodeBlock("HTML Code:", htmlCode);
+    addCodeBlock('HTML Code:', htmlCode);
     doc.addPage();
     y = 20; // ensure new page for CSS
 
-    addCodeBlock("CSS Code:", cssCode);
+    addCodeBlock('CSS Code:', cssCode);
     doc.addPage();
     y = 20; // ensure new page for JS
 
-    addCodeBlock("JavaScript Code:", jsCode);
+    addCodeBlock('JavaScript Code:', jsCode);
 
     // Save PDF
-    doc.save("code.pdf");
+    doc.save('code.pdf');
   }
 
   downloadPdf(); // call the function
