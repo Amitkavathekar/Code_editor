@@ -103,14 +103,18 @@ nav {
   background-color: #f1f1f1;
 }
 
+/* Output frame base styles */
 #outputFrame {
-  color: whitesmoke!;
+  /* previous invalid rule removed */
 }
 
 .output {
   width: 50%;
   display: flex;
   flex-direction: column;
+  border: 2px solid #555;
+  box-sizing: border-box;
+  overflow: auto;
 }
 
 .code-input {
@@ -200,23 +204,36 @@ nav {
   .container {
     flex-direction: column;
     padding: 10px;
+    height: 93vh; /* keep total height */
   }
 
-  .code {
+  .code, .output {
     width: 100%;
+    flex: 1 1 50%;
   }
 
   .code-input {
     width: 100%;
     height: 40vh;
-    margin-top: 30px;
-    margin-bottom: 15px;
+    margin: 30px auto 15px; /* center like output */
   }
 
   .output {
-    width: 100%;
-    height: 300px;
     margin-top: 15px;
+    flex: 1 1 50%; /* same height portion as inputs container */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .output > p {
+    width: 90%;
+    margin: 0 auto; /* same inner width as editors and iframe */
+  }
+
+  #outputFrame {
+    width: 90%;   /* same as editors' inner area */
+    height: 100%;
+    margin: 0 auto; /* center like inputs */
   }
 
   .modal-content {
@@ -286,29 +303,62 @@ nav {
   .container {
     flex-direction: column;
     padding: 15px;
+    height: 93vh; /* keep total height */
   }
 
-  .code {
+  .code, .output {
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+    display: block; /* stack like mobile */
+    flex: 1 1 50%;
   }
 
   .code-input {
-    flex: 1 1 45%;
-    height: 51vh;
-    min-width: 300px;
     width: 100%;
+    height: 40vh;
+    margin: 30px auto 15px; /* center like output */
   }
 
   .output {
-    width: 100%;
-    height: 400px;
     margin-top: 15px;
+    flex: 1 1 50%; /* same height portion as inputs container */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .output > p {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  #outputFrame {
+    width: 90%;   /* match input area width */
+    height: 100%;
+    margin: 0 auto;
   }
 
   .modal-content {
     width: 80%;
+  }
+}
+
+/* ✅ For screens below 900px: show output at the top */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .output {
+    order: -1; /* Move output above editors */
+  }
+
+  .code {
+    order: 1;
+  }
+
+  /* 👉 Output frame: scroll + 4-side border on small screens */
+  #outputFrame {
+    border: 2px solid #555;
+    box-sizing: border-box;
+    overflow: auto;
   }
 }

@@ -1,6 +1,19 @@
+// Default Ace Editor setup for Signup Page
+
 const htmlEditor = ace.edit('htmlEditor');
 htmlEditor.session.setMode('ace/mode/html');
-htmlEditor.setValue('<h1>Hello World...!</h1>');
+htmlEditor.setValue(
+`<div class="signup-container">
+  <h2>Sign Up</h2>
+  <form id="signupForm" onsubmit="signup(event)">
+    <input type="text" id="name" placeholder="Name" required /><br />
+    <input type="email" id="email" placeholder="Email" required /><br />
+    <input type="password" id="password" placeholder="Password" required /><br />
+    <button type="submit">Register</button>
+  </form>
+  <div id="signupMessage"></div>
+</div>`
+);
 htmlEditor.setOptions({
   enableBasicAutocompletion: true,
   enableSnippets: true,
@@ -9,6 +22,48 @@ htmlEditor.setOptions({
 
 const cssEditor = ace.edit('cssEditor');
 cssEditor.session.setMode('ace/mode/css');
+cssEditor.setValue(
+`.signup-container {
+  width: 350px;
+  margin: 50px auto;
+  padding: 30px 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #8886;
+  background: #fff;
+  text-align: center;
+}
+.signup-container h2 {
+  margin-bottom: 15px;
+}
+.signup-container input {
+  width: 90%;
+  margin: 7px 0;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #999;
+  outline: none;
+}
+.signup-container button {
+  margin-top: 13px;
+  width: 95%;
+  background-color: #0a72ef;
+  color: #fff;
+  padding: 10px 0;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#signupMessage {
+  margin-top: 12px;
+  color: green;
+  font-size: 15px;
+}
+body {
+  background: #f4f6fa;
+  min-height: 100vh;
+}`
+);
 cssEditor.setOptions({
   enableBasicAutocompletion: true,
   enableSnippets: true,
@@ -17,7 +72,26 @@ cssEditor.setOptions({
 
 const jsEditor = ace.edit('jsEditor');
 jsEditor.session.setMode('ace/mode/javascript');
-jsEditor.setValue("console.log('Hello from JS');");
+jsEditor.setValue(
+`function signup(e) {
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+
+  if (!name || !email || !password) {
+    document.getElementById('signupMessage').textContent = 'Please fill all fields!';
+    document.getElementById('signupMessage').style.color = 'red';
+    return;
+  }
+
+  // Simple local "success" simulation  
+  document.getElementById('signupMessage').textContent = 'Signup successful! Welcome, ' + name + '.';
+  document.getElementById('signupMessage').style.color = 'green';
+  document.getElementById('signupForm').reset();
+}
+`
+);
 jsEditor.setOptions({
   enableBasicAutocompletion: true,
   enableSnippets: true,
@@ -30,7 +104,6 @@ let isDark = false;
 function updateOutput() {
   const htmlCode = htmlEditor.getValue();
 
-
   const cssCode =
     `<style>
         body {
@@ -42,19 +115,19 @@ function updateOutput() {
     cssEditor.getValue() +
     '</style>';
 
-  const jsCode = '<script>' + jsEditor.getValue() + '</script>';
+  // Attach script so signup works in iframe
+  const jsCode = `<script>
+    ${jsEditor.getValue()}
+  <\/script>`;
 
   outputFrame.srcdoc = htmlCode + cssCode + jsCode;
 }
 
 htmlEditor.session.on('change', updateOutput);
 cssEditor.session.on('change', updateOutput);
-
 jsEditor.session.on('change', updateOutput);
 
-
 updateOutput();
-
 
 function copyHtmlCode() {
   navigator.clipboard.writeText(htmlEditor.getValue());
@@ -97,7 +170,6 @@ theme.addEventListener('click', () => {
     jsEditor.setTheme('ace/theme/chrome');
   }
 
-
   theme.src = isDark ? '/images/lightmode.png' : '/images/darkmode.png';
   pdf.src = isDark ? '/images/lightmodepdf.png' : '/images/pdf.png';
   about.src = isDark ? '/images/lightabout.png' : '/images/about.png';
@@ -105,10 +177,8 @@ theme.addEventListener('click', () => {
   document.body.style.color = isDark ? 'white' : 'black';
   document.body.style.backgroundColor = isDark ? '#1e1e1e' : 'white';
 
-
   updateOutput();
 });
-
 
 const aboutIcon = document.getElementById('about');
 const aboutModal = document.getElementById('aboutModal');
@@ -134,7 +204,6 @@ pdfIcon.addEventListener('click', () => {
     const { jsPDF } = window.jspdf;
     confirm('Download code');
 
-
     const htmlCode = htmlEditor.getValue();
     const cssCode = cssEditor.getValue();
     const jsCode = jsEditor.getValue();
@@ -143,12 +212,10 @@ pdfIcon.addEventListener('click', () => {
     const doc = new jsPDF();
     let y = 20;
 
-
     doc.setFont('courier', 'normal');
     doc.setFontSize(14);
     doc.text('QuickCode Project Export', 10, 10);
     doc.setFontSize(10);
-
 
     function addCodeBlock(title, code) {
       // Add title
@@ -169,7 +236,6 @@ pdfIcon.addEventListener('click', () => {
         y += 6;
       }
 
-
       y += 2;
       if (y < 280) {
         doc.setDrawColor(0);
@@ -180,7 +246,6 @@ pdfIcon.addEventListener('click', () => {
         y = 20;
       }
     }
-
 
     addCodeBlock('HTML Code:', htmlCode);
     doc.addPage();
