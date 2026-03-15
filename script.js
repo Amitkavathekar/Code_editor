@@ -30,7 +30,7 @@ let isDark = false;
 function updateOutput() {
   const htmlCode = htmlEditor.getValue();
 
-  // Inject dark/light mode style for iframe body
+
   const cssCode =
     `<style>
         body {
@@ -47,17 +47,15 @@ function updateOutput() {
   outputFrame.srcdoc = htmlCode + cssCode + jsCode;
 }
 
-// Live update whenever editor content changes
 htmlEditor.session.on('change', updateOutput);
 cssEditor.session.on('change', updateOutput);
+
 jsEditor.session.on('change', updateOutput);
 
-// Run once on load
+
 updateOutput();
 
-// ================================
-// Copy & Clear Functions
-// ================================
+
 function copyHtmlCode() {
   navigator.clipboard.writeText(htmlEditor.getValue());
   alert('HTML code copied!');
@@ -80,9 +78,6 @@ function clearJsCode() {
   jsEditor.setValue('');
 }
 
-// ================================
-// Theme Toggle
-// ================================
 const theme = document.getElementById('theme');
 const pdf = document.getElementById('pdf');
 const about = document.getElementById('about');
@@ -102,7 +97,7 @@ theme.addEventListener('click', () => {
     jsEditor.setTheme('ace/theme/chrome');
   }
 
-  // Change icons + parent styles
+
   theme.src = isDark ? '/images/lightmode.png' : '/images/darkmode.png';
   pdf.src = isDark ? '/images/lightmodepdf.png' : '/images/pdf.png';
   about.src = isDark ? '/images/lightabout.png' : '/images/about.png';
@@ -110,10 +105,11 @@ theme.addEventListener('click', () => {
   document.body.style.color = isDark ? 'white' : 'black';
   document.body.style.backgroundColor = isDark ? '#1e1e1e' : 'white';
 
-  // 🔥 Re-render iframe with correct theme
+
   updateOutput();
 });
-// =================== ABOUT MODAL =================== //
+
+
 const aboutIcon = document.getElementById('about');
 const aboutModal = document.getElementById('aboutModal');
 const closeBtn = aboutModal.querySelector('.close');
@@ -138,22 +134,22 @@ pdfIcon.addEventListener('click', () => {
     const { jsPDF } = window.jspdf;
     confirm('Download code');
 
-    // Get code from editors
+
     const htmlCode = htmlEditor.getValue();
     const cssCode = cssEditor.getValue();
     const jsCode = jsEditor.getValue();
 
     // Create PDF
     const doc = new jsPDF();
-    let y = 20; // starting y-coordinate
+    let y = 20;
 
-    // Title
+
     doc.setFont('courier', 'normal');
     doc.setFontSize(14);
     doc.text('QuickCode Project Export', 10, 10);
     doc.setFontSize(10);
 
-    // Helper to add code block with automatic new page if needed
+
     function addCodeBlock(title, code) {
       // Add title
       doc.setFontSize(12);
@@ -173,7 +169,7 @@ pdfIcon.addEventListener('click', () => {
         y += 6;
       }
 
-      // Add separator line
+
       y += 2;
       if (y < 280) {
         doc.setDrawColor(0);
@@ -185,14 +181,14 @@ pdfIcon.addEventListener('click', () => {
       }
     }
 
-    // Add blocks on separate pages
+
     addCodeBlock('HTML Code:', htmlCode);
     doc.addPage();
-    y = 20; // ensure new page for CSS
+    y = 20;
 
     addCodeBlock('CSS Code:', cssCode);
     doc.addPage();
-    y = 20; // ensure new page for JS
+    y = 20;
 
     addCodeBlock('JavaScript Code:', jsCode);
 
@@ -200,5 +196,5 @@ pdfIcon.addEventListener('click', () => {
     doc.save('code.pdf');
   }
 
-  downloadPdf(); // call the function
+  downloadPdf();
 });
